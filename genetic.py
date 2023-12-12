@@ -167,5 +167,5 @@ def showColoring(graph: nx.Graph, colors: dict):
     plt.show()
 
 
-graph = nx.gnp_random_graph(50, 0.4)
-showColoring(graph, coloringGenetics(graph))
+# graph = nx.gnp_random_graph(50, 0.4)
+# showColoring(graph, coloringGenetics(graph))

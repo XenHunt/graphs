@@ -67,6 +67,6 @@ def showColoring(graph: nx.Graph, colors: Dict[int, int]):
     plt.show()
 
 
-graph = nx.gnp_random_graph(20, 0.3)
-showColoring(graph, coloringGreedy(graph))
+# graph = nx.gnp_random_graph(20, 0.3)
+# showColoring(graph, coloringGreedy(graph))
 # randomShow(10)
