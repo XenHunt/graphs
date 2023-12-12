@@ -121,21 +121,31 @@ def genetic_algorithm(graph: nx.Graph, max_generations=10000) -> list[int]:
     Returns:
         Расскраску - список, где индекс - номер вершины, а значение - цвет
     """
+    # Создаём популяцию
     population_size = 100
     population = [create_chromosome(graph) for _ in range(population_size)]
 
+    # Пока макс кол-во поколений не было превышено в цикле запускаем алгоритм
     for _ in range(max_generations):
+        # Сортируем от самого приспособленного, до самого худшего
         population = sorted(population, key=lambda c: calculate_fitness(graph, c))
+
+        # Проверяем, не появилась ли та расскраска, которая нам нужна
         if calculate_fitness(graph, population[0]) == 0:
             return population[0]
+
+        # Создаём новое поколение, сохраняя первых двух из старого
         next_generation = population[:2]
         for _ in range(population_size - 2):
+            # Выбираем родителей и создаём потомство, которое отправляет в популяцию
             parents = select_parents(population)
             offspring = crossover(*parents)
             offspring = [mutate(chrom) for chrom in offspring]
             next_generation += offspring
+
         population = next_generation
 
+    # Если превысиели кол-во поколений, то возвращаем лучшую популяцию
     return min(population, key=lambda c: calculate_fitness(graph, c))
 
 
@@ -157,5 +167,5 @@ def showColoring(graph: nx.Graph, colors: dict):
     plt.show()
 
 
-graph = nx.gnp_random_graph(10, 0.3)
+graph = nx.gnp_random_graph(50, 0.4)
 showColoring(graph, coloringGenetics(graph))
